@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom"
 import { cn } from "@/lib/utils"
 
 interface SidebarItemProps {
-  title?: string
+  title: string
   path: string
   icon: React.ElementType
 }
