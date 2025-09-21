@@ -1,7 +1,7 @@
 import { StrictMode } from "react"
 import { BrowserRouter } from "react-router"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-
+import { ThemeProvider } from "./themeProvider"
 import type { ReactNode } from "react"
 
 type ProviderProps = {
@@ -15,7 +15,9 @@ const Provider = ({ children }: ProviderProps) => {
         <StrictMode>
             <QueryClientProvider client={queryClient}>
                 <BrowserRouter>
-                    {children}
+                    <ThemeProvider>
+                        {children}
+                    </ThemeProvider>
                 </BrowserRouter>
             </QueryClientProvider>
         </StrictMode>

@@ -1,5 +1,5 @@
 
-type OrdersData = {
+export type OrdersData = {
     id: string
     date: string
     customerId: string

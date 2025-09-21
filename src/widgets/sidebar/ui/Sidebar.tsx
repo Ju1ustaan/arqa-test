@@ -2,10 +2,20 @@ import { useState } from 'react'
 
 import { navigation } from '../model/navigation'
 
-import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { CardTitle, Card } from '@/components/ui/card'
+import { ArrowLeft, ArrowRight, Settings, Languages } from 'lucide-react'
+import { CardTitle, Card, CardContent } from '@/components/ui/card'
+import { Separator } from "@/components/ui/separator"
+import { Switch } from "@/components/ui/switch"
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
 import SidebarItem from "./SidebarItem"
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { ModeToggle } from './ThemeToggle'
 
 const Sidebar = () => {
     const [open, setOpen] = useState(true)
@@ -30,6 +40,25 @@ const Sidebar = () => {
                         <SidebarItem key={item.path} {...item} />
                     ))}
                 </nav>
+                <Separator className="" />
+
+                <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                        <AccordionTrigger className='items-center gap-2'>
+                            <p className='flex items-center gap-2'><Settings className="h-4 w-4" />Settings</p>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <Card>
+                                <CardContent className='flex justify-between'>
+                                    <Button variant="ghost"><Languages /> Eng</Button>
+                                    <ModeToggle />
+                                </CardContent>
+                            </Card>
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+
+
             </Card>
             {!open && (
                 <ArrowRight
