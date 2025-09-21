@@ -11,11 +11,15 @@ const data = [
   { name: "Вс", revenue: 3490 },
 ]
 
+
+type ChartData = { date: string; value: number }
+
 interface RevenueChartProps {
-  type?: "line" | "bar"
+  type?: "line" | "bar";
+  data?: ChartData [];
 }
 
-const RevenuChart = ({ type = "line" }: RevenueChartProps) => {
+const RevenuChart = ({ type = "line", data }: RevenueChartProps) => {
   return (
     <Card className="mt-6">
       <CardHeader>
@@ -26,18 +30,18 @@ const RevenuChart = ({ type = "line" }: RevenueChartProps) => {
           {type === "line" ? (
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
-              <Line type="monotone" dataKey="revenue" stroke="#1E3A85" strokeWidth={2} />
+              <Line type="monotone" dataKey="value" stroke="#1E3A85" strokeWidth={2} />
             </LineChart>
           ) : (
             <BarChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="revenue" fill="#1E3A85" />
+              <Bar dataKey="value" fill="#1E3A85" />
             </BarChart>
           )}
         </ResponsiveContainer>

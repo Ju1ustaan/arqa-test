@@ -1,25 +1,57 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { 
-    Sheet, 
-    SheetContent, 
-    SheetHeader, 
-    SheetTitle, 
-    SheetTrigger 
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
 } from "@/components/ui/sheet"
-import { 
-    Select, 
-    SelectContent, 
-    SelectItem, 
-    SelectTrigger, 
-    SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
 } from "@/components/ui/select"
+
+const periodOptions = [
+  { value: "7d", label: "7 дней" },
+  { value: "30d", label: "30 дней" },
+  { value: "qtd", label: "QTD" },
+  { value: "ytd", label: "YTD" },
+]
+
+const salesOptions = [
+  { value: "Web", label: "Web" },
+  { value: "Mobile", label: "Mobile" },
+  { value: "Offline", label: "Offline" },
+]
+
+const cityOptions = [
+  { value: "Алматы", label: "Алматы" },
+  { value: "Астана", label: "Астана" },
+]
 
 const Filters = () => {
   const [period, setPeriod] = useState("7d")
   const [channel, setChannel] = useState("Web")
   const [city, setCity] = useState("Алматы")
+  
+  useEffect(() => {
+    const savedFilters = localStorage.getItem("filters")
+    if (savedFilters) {
+      const { period, channel, city } = JSON.parse(savedFilters)
+      if (period) setPeriod(period)
+      if (channel) setChannel(channel)
+      if (city) setCity(city)
+    }
+  }, [])
 
+  const applyFilters = () => {
+    const filters = { period, channel, city }
+    localStorage.setItem("filters", JSON.stringify(filters))
+  }
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -36,10 +68,11 @@ const Filters = () => {
             <Select value={period} onValueChange={setPeriod}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="7d">7 дней</SelectItem>
-                <SelectItem value="30d">30 дней</SelectItem>
-                <SelectItem value="qtd">QTD</SelectItem>
-                <SelectItem value="ytd">YTD</SelectItem>
+                {
+                  periodOptions.map(option => (
+                    <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                  ))
+                }
               </SelectContent>
             </Select>
           </div>
@@ -49,9 +82,11 @@ const Filters = () => {
             <Select value={channel} onValueChange={setChannel}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="Web">Web</SelectItem>
-                <SelectItem value="Mobile">Mobile</SelectItem>
-                <SelectItem value="Offline">Offline</SelectItem>
+                {
+                  salesOptions.map(option => (
+                    <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                  ))
+                }
               </SelectContent>
             </Select>
           </div>
@@ -61,13 +96,16 @@ const Filters = () => {
             <Select value={city} onValueChange={setCity}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="Алматы">Алматы</SelectItem>
-                <SelectItem value="Астана">Астана</SelectItem>
+                {
+                  cityOptions.map(option => (
+                    <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                  ))
+                }
               </SelectContent>
             </Select>
           </div>
 
-          <Button className="w-full mt-4">Применить</Button>
+          <Button className="w-full mt-4" onClick={applyFilters}>Применить</Button>
         </div>
       </SheetContent>
     </Sheet>
