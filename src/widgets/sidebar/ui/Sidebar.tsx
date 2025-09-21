@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { navigation } from '../model/navigation'
 
-import { ArrowLeft, ArrowRight, Settings, Languages } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Settings } from 'lucide-react'
 import { CardTitle, Card, CardContent } from '@/components/ui/card'
 import { Separator } from "@/components/ui/separator"
 import {
@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/accordion"
 import SidebarItem from "./SidebarItem"
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 import { ModeToggle } from './ThemeToggle'
 import { LanguageToggle } from './LangToggle'
 
