@@ -15,6 +15,7 @@ import SidebarItem from "./SidebarItem"
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { ModeToggle } from './ThemeToggle'
+import { LanguageToggle } from './LangToggle'
 
 const Sidebar = () => {
     const [open, setOpen] = useState(true)
@@ -49,7 +50,7 @@ const Sidebar = () => {
                         <AccordionContent>
                             <Card>
                                 <CardContent className='flex justify-between'>
-                                    <Button variant="ghost"><Languages /> Eng</Button>
+                                    <LanguageToggle/>
                                     <ModeToggle />
                                 </CardContent>
                             </Card>

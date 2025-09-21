@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 
 import { fetchOrderData } from "../model/api"
 import type { OrdersData } from "../model/api"
-
+import { useTranslation } from "react-i18next"
 import {
   Table,
   TableBody,
@@ -26,6 +26,7 @@ import { OrderPagination } from "./OrderPagination"
 import { cn } from "@/lib/utils"
 
 export const OrdersTable = () => {
+    const {t} = useTranslation()
   const { data, isLoading, isError } = useQuery<OrdersData[]>({
     queryKey: ["orders"],
     queryFn: fetchOrderData,
@@ -87,7 +88,7 @@ export const OrdersTable = () => {
   return (
     <div className="space-y-4">
       <Input
-        placeholder="Search by ID, customer, or city..."
+        placeholder={t("searchPlaceholder")}
         value={search}
         onChange={(e) => {
           setPage(1)
@@ -106,7 +107,7 @@ export const OrdersTable = () => {
                   onClick={() => handleSort(field as keyof OrdersData)}
                   className="cursor-pointer select-none"
                 >
-                  {field.toUpperCase()}{" "}
+                  {t(`columns.${field}`)}{" "}
                   {sortField === field ? (sortOrder === "asc" ? "↑" : "↓") : ""}
                 </TableHead>
               )

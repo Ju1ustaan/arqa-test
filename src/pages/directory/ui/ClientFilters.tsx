@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
+import { useTranslation } from "react-i18next"
 type Props = {
   search: string
   setSearch: (v: string) => void
@@ -9,10 +9,11 @@ type Props = {
 }
 
 export const ClientFilters = ({ search, setSearch, city, setCity }: Props) => {
+  const { t } = useTranslation()
   return (
     <div className="flex gap-4 mb-4">
       <Input
-        placeholder="Поиск по имени или email..."
+        placeholder={t("searchPlaceholderByName")}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="w-1/3"

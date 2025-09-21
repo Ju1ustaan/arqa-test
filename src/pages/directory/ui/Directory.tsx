@@ -1,12 +1,14 @@
 import { useState } from "react"
 import { clients } from "../model/mock"
 import type { Client } from "../model/types"
+import { useTranslation } from "react-i18next"
 
 import { ClientFilters} from "./ClientFilters"
 import { ClientsTable } from "./ClientsTable"
 import { ClientDialog } from "./ClientDialog"
 
 export const Directory = () => {
+  const { t } = useTranslation()
   const [search, setSearch] = useState("")
   const [city, setCity] = useState("")
   const [selected, setSelected] = useState<Client | null>(null)
@@ -22,7 +24,7 @@ export const Directory = () => {
 
   return (
     <div className="p-6 w-full">
-      <h1 className="text-2xl font-bold mb-4">Сustomer directory</h1>
+      <h1 className="text-2xl font-bold mb-4">{t("directory.title")}</h1>
 
       <ClientFilters search={search} setSearch={setSearch} city={city} setCity={setCity} />
       <ClientsTable

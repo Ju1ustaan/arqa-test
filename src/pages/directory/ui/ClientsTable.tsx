@@ -1,5 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import type { Client } from "../model/types"
+import { useTranslation } from "react-i18next"
 
 type Props = {
   data: Client[]
@@ -7,15 +8,17 @@ type Props = {
 }
 
 export function ClientsTable({ data, onSelect }: Props) {
+  const { t } = useTranslation()  
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Name</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead>City</TableHead>
-          <TableHead>LTV</TableHead>
-          <TableHead>Orders</TableHead>
+          {
+            ["Name", "Email", "City", "LTV", "Orders"].map((field) => (
+              <TableHead key={field}>{t(`directory.columns.${field}`)}</TableHead>
+
+            ))
+          }
         </TableRow>
       </TableHeader>
       <TableBody>
