@@ -15,9 +15,11 @@ import {
   SelectValue
 } from "@/components/ui/select"
 
+import type {DashboardFilters} from "../model/api"
+
 
 interface FiltersProps {
-  onApply?: (filters: { period: string; channel: string; city: string }) => void;
+  onApply?: (filters: DashboardFilters) => void;
 }
 
 const periodOptions = [
@@ -40,9 +42,9 @@ const cityOptions = [
 
 const Filters = ({ onApply }: FiltersProps) => {
   const [open, setOpen] = useState(false)
-  const [period, setPeriod] = useState("7d")
-  const [channel, setChannel] = useState("Web")
-  const [city, setCity] = useState("Алматы")
+  const [period, setPeriod] = useState<DashboardFilters["period"]>("7d")
+  const [channel, setChannel] = useState<DashboardFilters["channel"]>("Web")
+  const [city, setCity] = useState<DashboardFilters["city"]>("Алматы")
   
   useEffect(() => {
     const savedFilters = localStorage.getItem("filters")
@@ -57,8 +59,8 @@ const Filters = ({ onApply }: FiltersProps) => {
   const applyFilters = () => {
     const filters = { period, channel, city }
     localStorage.setItem("filters", JSON.stringify(filters))
-    onApply?.(filters)   // передаём наверх
-    setOpen(false)       // закрываем Sheet
+    onApply?.(filters)  
+    setOpen(false)   
   }
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -73,7 +75,7 @@ const Filters = ({ onApply }: FiltersProps) => {
         <div className="space-y-4 mt-4 px-2">
           <div>
             <label className="text-sm">Период</label>
-            <Select value={period} onValueChange={setPeriod}>
+            <Select value={period} onValueChange={(val) => setPeriod(val as DashboardFilters["period"])}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 {
@@ -87,7 +89,7 @@ const Filters = ({ onApply }: FiltersProps) => {
 
           <div>
             <label className="text-sm">Канал продаж</label>
-            <Select value={channel} onValueChange={setChannel}>
+            <Select value={channel} onValueChange={(val) => setChannel(val as DashboardFilters["channel"])}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 {
@@ -101,7 +103,7 @@ const Filters = ({ onApply }: FiltersProps) => {
 
           <div>
             <label className="text-sm">Город</label>
-            <Select value={city} onValueChange={setCity}>
+            <Select value={city} onValueChange={(val) => setCity(val as DashboardFilters["city"])}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 {

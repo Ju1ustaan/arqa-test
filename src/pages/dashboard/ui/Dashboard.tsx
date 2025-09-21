@@ -25,7 +25,7 @@ export const Dashboard = () => {
         setFilters(savedFilters ? JSON.parse(savedFilters) : { period: "7d", channel: "Web", city: "Алматы" })
     }, [])
 
-    const { data, isLoading, isError, error, refetch } = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ["dashboard", filters],
         queryFn: () => fetchDashboardData(filters),
     })

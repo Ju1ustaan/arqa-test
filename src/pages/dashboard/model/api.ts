@@ -13,20 +13,18 @@ export type DashboardData = {
 }
 
 export const fetchDashboardData = (filters: DashboardFilters): Promise<DashboardData> => {
-  const shouldFail = Math.random() < 0.2 // 20% шанс ошибки
+  const shouldFail = Math.random() < 0.8
   if (shouldFail) {
     throw new Error("Ошибка загрузки данных (mock)")
   }
 
   return new Promise((resolve) => {
     setTimeout(() => {
-      // Базовые данные
       let revenue = 24000
       let orders = 320
       let aov = 75
       let conversionRate = 2.3
 
-      // 📊 модификация по фильтрам
       if (filters.city === "Астана") {
         revenue *= 1.2
         orders *= 1.1
@@ -44,7 +42,6 @@ export const fetchDashboardData = (filters: DashboardFilters): Promise<Dashboard
         orders *= 12
       }
 
-      // моковый график
       const chart = [
         { date: "2025-09-01", value: revenue * 0.2 },
         { date: "2025-09-02", value: revenue * 0.25 },
