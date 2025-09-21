@@ -15,6 +15,11 @@ import {
   SelectValue
 } from "@/components/ui/select"
 
+
+interface FiltersProps {
+  onApply?: (filters: { period: string; channel: string; city: string }) => void;
+}
+
 const periodOptions = [
   { value: "7d", label: "7 дней" },
   { value: "30d", label: "30 дней" },
@@ -33,7 +38,8 @@ const cityOptions = [
   { value: "Астана", label: "Астана" },
 ]
 
-const Filters = () => {
+const Filters = ({ onApply }: FiltersProps) => {
+  const [open, setOpen] = useState(false)
   const [period, setPeriod] = useState("7d")
   const [channel, setChannel] = useState("Web")
   const [city, setCity] = useState("Алматы")
@@ -51,9 +57,11 @@ const Filters = () => {
   const applyFilters = () => {
     const filters = { period, channel, city }
     localStorage.setItem("filters", JSON.stringify(filters))
+    onApply?.(filters)   // передаём наверх
+    setOpen(false)       // закрываем Sheet
   }
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="outline">Фильтры</Button>
       </SheetTrigger>

@@ -13,7 +13,7 @@ const Sidebar = () => {
     return (
         <>
             <Card
-                className={`absolute md:static h-screen p-4 flex flex-col transform duration-300 ease-in-out
+                className={`absolute z-10 md:static h-screen p-4 flex flex-col transform duration-300 ease-in-out
             ${open ? 'translate-x-0 w-64' : '-translate-x-56 w-0'}`}>
                 <div className="flex justify-between items-center">
                     <CardTitle className="text-lg font-bold">ARQA</CardTitle>
