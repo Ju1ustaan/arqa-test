@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
+
 import { useQuery } from "@tanstack/react-query"
+
 import { fetchDashboardData } from "../model/api"
 import type { DashboardFilters } from "../model/api"
 
