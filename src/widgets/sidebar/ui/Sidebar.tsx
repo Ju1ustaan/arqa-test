@@ -5,7 +5,6 @@ import { navigation } from '../model/navigation'
 import { ArrowLeft, ArrowRight, Settings, Languages } from 'lucide-react'
 import { CardTitle, Card, CardContent } from '@/components/ui/card'
 import { Separator } from "@/components/ui/separator"
-import { Switch } from "@/components/ui/switch"
 import {
     Accordion,
     AccordionContent,

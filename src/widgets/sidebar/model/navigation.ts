@@ -1,4 +1,4 @@
-import { Home, BarChart3, Settings, Book } from "lucide-react"
+import { Home, BarChart3, Book } from "lucide-react"
 
 export const navigation = [
   { title: "Dashboard", path: "/", icon: Home },
