@@ -65,16 +65,10 @@
 
 ---
 
-## 📜 Лицензия
-
-Проект распространяется под лицензией [MIT](LICENSE).
-
----
-
 ## ✨ Автор
 
 **Лугинов Дьулустаан**  
 Frontend Developer | React / TypeScript / Node.js  
-📫 Telegram: [@julustaan](https://t.me/julustaan)
+📫 Telegram: [@JulustaanL](https://t.me/JulustaanL)
 
 ---
